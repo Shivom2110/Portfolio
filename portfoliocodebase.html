@@ -56,11 +56,12 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
+            transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1), opacity 0.6s ease;
         }
 
         .intro-screen.hidden {
             transform: translateY(-100%);
+            opacity: 0;
         }
 
         .logo-container {
@@ -79,6 +80,11 @@
             align-items: center;
             position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.4s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo-letter {
@@ -119,6 +125,7 @@
             letter-spacing: 2px;
             opacity: 0;
             animation: fadeIn 2s ease 1s forwards, bounce 2s ease-in-out infinite;
+            cursor: pointer;
         }
 
         @keyframes fadeIn {
@@ -137,6 +144,7 @@
             position: relative;
             z-index: 1;
             transition: opacity 0.5s ease;
+            margin-top: 100vh;
         }
 
         header {
@@ -184,6 +192,9 @@
             color: var(--text-muted);
             max-width: 600px;
             animation: fadeInUp 1s ease 0.3s both;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
         }
 
         nav {
@@ -322,16 +333,39 @@
             position: relative;
             max-width: 800px;
             margin: 0 auto;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 20px 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) var(--bg-medium);
+            border: 1px solid rgba(0, 123, 255, 0.2);
+            border-radius: var(--border-radius);
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .experience-timeline::before {
             content: '';
             position: absolute;
             width: 2px;
-            height: 100%;
+            height: calc(100% - 40px);
             background: var(--primary);
             left: 50%;
             transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .experience-timeline::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .experience-timeline::-webkit-scrollbar-track {
+            background: var(--bg-medium);
+            border-radius: 10px;
+        }
+
+        .experience-timeline::-webkit-scrollbar-thumb {
+            background-color: var(--primary);
+            border-radius: 10px;
         }
 
         .job {
@@ -487,6 +521,7 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            margin-top: 2rem;
         }
 
         .button:hover {
@@ -566,6 +601,9 @@
                 width: calc(100% - 60px);
                 left: 60px !important;
             }
+            .experience-timeline {
+                max-height: 600px;
+            }
             .logo-container {
                 width: 150px;
                 height: 150px;
@@ -609,6 +647,31 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Add scroll hint styling */
+        .scroll-hint {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+            margin-bottom: 20px;
+        }
+
+        .scroll-hint i {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
     </style>
 </head>
 <body>
@@ -634,7 +697,7 @@
         <header>
             <div class="content">
                 <h1>Shivom Vinayak Raskar</h1>
-                <p>Computer Science and Engineering | Innovating with Intelligence</p>
+                <p>Innovating Intelligence</p>
                 <a href="#about" class="button">Learn More</a>
             </div>
         </header>
@@ -648,10 +711,10 @@
                 
                 <div class="about-content">
                     <div class="about-text fade-in">
-                        <p><strong>Education:</strong> The University of Toledo, Ohio<br>
+                        <p><strong>Education:</strong> The University of Toledo, College of Engineering, Toledo, OH<br>
                         Bachelor of Science: Computer Science and Engineering<br>
-                        GPA: 3.6 (Anticipated Graduation: 08/2026)</p>
-                        <p><strong>Honors & Awards:</strong> Dean's List, Judges' Choice Award, People's Choice Award</p>
+                        GPA: 3.6 (Anticipated Graduation: December 2026)</p>
+                        <p><strong>Honors & Awards:</strong> Hactober Fest hackathon 2 consecutive years special mentions, Dean's List, Judges' Choice Award and People's Choice Award for Showcase on Face Mask Detection Project</p>
                         <p>I'm a dedicated computer science student with a passion for solving complex problems through technology. My academic journey has equipped me with strong foundations in software development, machine learning, and creative problem-solving.</p>
                     </div>
                     
@@ -665,20 +728,44 @@
                             <span>Python</span>
                         </div>
                         <div class="skill-card">
-                            <i class="fab fa-unity"></i>
-                            <span>C# & Unity</span>
+                            <i class="fab fa-java"></i>
+                            <span>Java</span>
                         </div>
                         <div class="skill-card">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML & CSS</span>
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
                         </div>
                         <div class="skill-card">
                             <i class="fab fa-js"></i>
                             <span>JavaScript</span>
                         </div>
                         <div class="skill-card">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML & CSS</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-database"></i>
+                            <span>Database Management</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-git-alt"></i>
+                            <span>Git</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-windows"></i>
+                            <span>Microsoft Azure AD</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fab fa-linux"></i>
+                            <span>Linux/Ubuntu</span>
+                        </div>
+                        <div class="skill-card">
                             <i class="fab fa-adobe"></i>
                             <span>Adobe Illustrator</span>
+                        </div>
+                        <div class="skill-card">
+                            <i class="fas fa-drafting-compass"></i>
+                            <span>Figma/AutoCAD/SolidWorks</span>
                         </div>
                     </div>
                 </div>
@@ -695,6 +782,58 @@
                 <div class="experience-timeline">
                     <div class="job fade-in">
                         <div class="job-content">
+                            <span class="job-date">November 2023 - Present</span>
+                            <h3>Information Technology Engineer II</h3>
+                            <p>University of Toledo Engineering College, Toledo, OH</p>
+                            <ul>
+                                <li>Improving VMware infrastructure for over 20,000 users through Microsoft Azure AD and PowerShell scripting.</li>
+                                <li>Deploy OS images to new staff and lab devices via PXE for efficient, network-based setup.</li>
+                                <li>Helping reduces a backlog of Termination reports, which aids in reducing incoming ticket count by 20%.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="job fade-in">
+                        <div class="job-content">
+                            <span class="job-date">August 2024 - December 2024</span>
+                            <h3>Software Engineer</h3>
+                            <p>R.W. Beckett, Cleveland, OH</p>
+                            <ul>
+                                <li>Set up and managed databases, test stand I/O devices, and data acquisition systems, including oscilloscopes and measurement tools.</li>
+                                <li>Strengthened C programming skills, contributed to GeniSys Control, and performed unit testing and bug resolution.</li>
+                                <li>Gained expertise in operating systems, PLCs, and integrating physical hardware with software logic.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="job fade-in">
+                        <div class="job-content">
+                            <span class="job-date">January 2023 - May 2023</span>
+                            <h3>Mentor</h3>
+                            <p>University of Toledo, Toledo, OH</p>
+                            <ul>
+                                <li>Set up coding projects and activities, facilitating practical application of knowledge and aiding during challenges.</li>
+                                <li>Established a positive and collaborative classroom environment, promoting mutual respect and candid communication.</li>
+                                <li>Guided and supported students in understanding Java concepts, offering clarification and encouragement for improved teamwork.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="job fade-in">
+                        <div class="job-content">
+                            <span class="job-date">2022 - 2023</span>
+                            <h3>Lab Instructor</h3>
+                            <p>University of Toledo, Toledo, OH</p>
+                            <ul>
+                                <li>Guided students in understanding Java concepts and practical coding exercises.</li>
+                                <li>Fostered teamwork and encouraged engagement through projects and activities.</li>
+                                <li>Created a collaborative classroom environment.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="job fade-in">
+                        <div class="job-content">
                             <span class="job-date">12/2021 – 06/2022</span>
                             <h3>Instructor at Trusity</h3>
                             <p>Dubai, UAE</p>
@@ -705,19 +844,10 @@
                             </ul>
                         </div>
                     </div>
-                    
-                    <div class="job fade-in">
-                        <div class="job-content">
-                            <span class="job-date">Present</span>
-                            <h3>Peer Mentor</h3>
-                            <p>University of Toledo, Ohio</p>
-                            <ul>
-                                <li>Guided students in understanding Java concepts and practical coding exercises.</li>
-                                <li>Fostered teamwork and encouraged engagement through projects and activities.</li>
-                                <li>Created a collaborative classroom environment.</li>
-                            </ul>
-                        </div>
-                    </div>
+                </div>
+                <div class="scroll-hint fade-in">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>Scroll to see more</span>
                 </div>
             </div>
         </section>
@@ -731,23 +861,10 @@
                 
                 <div class="projects-grid">
                     <div class="project-card fade-in">
-                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="project-content">
-                            <h3>Hand Gesture Bot</h3>
-                            <p>Developed a robot controlled via hand gestures using Arduino Nano, MPU6050, RF transmitter-receiver pair, and L293D motor driver.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Arduino</span>
-                                <span class="project-tag">Robotics</span>
-                                <span class="project-tag">Hardware</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card fade-in">
                         <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1569012871812-f38ee64cd54c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="project-content">
                             <h3>Face Mask Detection</h3>
-                            <p>Programmed a face mask detection model using Machine Learning and TensorFlow.</p>
+                            <p>Developed a face mask detection model utilizing Machine Learning algorithms and TensorFlow. Programmed and implemented the machine learning algorithm to effectively detect the presence of face masks.</p>
                             <div class="project-tags">
                                 <span class="project-tag">TensorFlow</span>
                                 <span class="project-tag">Machine Learning</span>
@@ -757,15 +874,29 @@
                     </div>
                     
                     <div class="project-card fade-in">
-                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1588508065123-287b28e013da?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
                         <div class="project-content">
-                            <h3>Web Design</h3>
-                            <p>Designed web templates and applications using Figma, HTML, CSS, and JavaScript. Created posters using Adobe Illustrator and Canva.</p>
+                            <h3>Autonomous Vehicle AI Enhancement</h3>
+                            <p>Developed ML algorithms for navigation and obstacle detection in an autonomous car robot prototype. Optimized AI car robot software through Python testing and debugging for reliable performance across scenarios.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Figma</span>
-                                <span class="project-tag">HTML/CSS</span>
-                                <span class="project-tag">JavaScript</span>
-                                <span class="project-tag">Adobe</span>
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Machine Learning</span>
+                                <span class="project-tag">Computer Vision</span>
+                                <span class="project-tag">Robotics</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in">
+                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="project-content">
+                            <h3>Hand Gestured Control Bot</h3>
+                            <p>Spearheaded the development of a Hand Gesture Bot, leveraging Arduino Nano, MPU6050 sensor, RF transmitter-receiver pair, and L293D motor driver.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Arduino</span>
+                                <span class="project-tag">Robotics</span>
+                                <span class="project-tag">Hardware</span>
+                                <span class="project-tag">Sensors</span>
                             </div>
                         </div>
                     </div>
@@ -784,7 +915,7 @@
                     <div class="contact-item fade-in">
                         <i class="fas fa-envelope"></i>
                         <h3>Email</h3>
-                        <a href="mailto:shivom192003@gmail.com">shivom192003@gmail.com</a>
+                        <a href="mailto:svinaya2@rockets.utoledo.edu">svinaya2@rockets.utoledo.edu</a>
                     </div>
                     
                     <div class="contact-item fade-in">
@@ -796,7 +927,7 @@
                     <div class="contact-item fade-in">
                         <i class="fab fa-linkedin"></i>
                         <h3>LinkedIn</h3>
-                        <a href="https://www.linkedin.com/in/shivom-vr-694954206" target="_blank">Connect on LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/shivom-vr-69495420" target="_blank">Connect on LinkedIn</a>
                     </div>
                 </div>
             </div>
@@ -804,11 +935,11 @@
         
         <footer>
             <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/shivom-vr-694954206" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Shivom2110" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shivom-vr-69495420" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 <a href="mailto:shivom192003@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-            <p>&copy; 2024 Shivom Vinayak Raskar. All rights reserved.</p>
+            <p>&copy; Shivom Vinayak Raskar. All rights reserved.</p>
         </footer>
     </div>
     
@@ -819,19 +950,14 @@
         const navbar = document.getElementById('navbar');
         
         // Show intro screen initially
-        document.body.style.overflow = 'hidden';
-        
-        // After 2 seconds, allow scrolling
-        setTimeout(() => {
-            document.body.style.overflow = 'auto';
-        }, 2000);
+        document.body.style.overflow = 'auto';
         
         // Handle scroll events
         window.addEventListener('scroll', function() {
             const scrollPosition = window.scrollY;
             
             // Hide intro screen when scrolling down
-            if (scrollPosition > 100) {
+            if (scrollPosition > window.innerHeight * 0.5) {
                 introScreen.classList.add('hidden');
                 navbar.classList.add('visible');
             } else {
@@ -840,7 +966,7 @@
             }
             
             // Additional navbar effect when scrolling further
-            if (scrollPosition > 300) {
+            if (scrollPosition > window.innerHeight + 100) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
@@ -882,6 +1008,22 @@
         
         // Check on scroll
         window.addEventListener('scroll', checkFade);
+
+        // Allow users to click the scroll indicator to start scrolling
+        document.querySelector('.scroll-indicator').addEventListener('click', function() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Also allow clicking the logo to scroll
+        document.querySelector('.logo').addEventListener('click', function() {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
 </html>
