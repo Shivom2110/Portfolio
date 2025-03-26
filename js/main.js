@@ -55,11 +55,40 @@ const observer = new IntersectionObserver((entries) => {
 
 // Function to start observing elements
 function startObserving() {
-    // Observe sections
+    // Observe sections and their content
     document.querySelectorAll('section').forEach(section => {
+        // Add fade-in to section
         section.classList.add('fade-in');
         observer.observe(section);
+
+        // Add fade-in to section content
+        const content = section.querySelector('.container');
+        if (content) {
+            content.classList.add('fade-in');
+            observer.observe(content);
+        }
     });
+
+    // Observe about content specifically
+    const aboutContent = document.querySelector('.about-content');
+    if (aboutContent) {
+        aboutContent.classList.add('fade-in');
+        observer.observe(aboutContent);
+
+        // Handle about text and skills container separately
+        const aboutText = aboutContent.querySelector('.about-text');
+        const skillsContainer = aboutContent.querySelector('.skills-container');
+        
+        if (aboutText) {
+            aboutText.classList.add('fade-in');
+            observer.observe(aboutText);
+        }
+        
+        if (skillsContainer) {
+            skillsContainer.classList.add('fade-in');
+            observer.observe(skillsContainer);
+        }
+    }
 
     // Observe section titles
     document.querySelectorAll('.section-title').forEach(title => {
@@ -67,9 +96,10 @@ function startObserving() {
         observer.observe(title);
     });
 
-    // Observe individual elements
-    document.querySelectorAll('.skill-card, .job-content, .project-card, .contact-item').forEach(element => {
+    // Observe individual elements with staggered delay
+    document.querySelectorAll('.skill-card, .job-content, .project-card, .contact-item').forEach((element, index) => {
         element.classList.add('fade-in');
+        element.style.transitionDelay = `${index * 0.1}s`;
         observer.observe(element);
     });
 
@@ -95,6 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const introScreen = document.querySelector('.intro-screen');
         if (introScreen) {
             introScreen.classList.add('hidden');
+            // Start observing elements after intro screen is hidden
+            setTimeout(startObserving, 500);
         }
     }, 1500);
 
@@ -103,9 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navbar) {
         navbar.classList.add('visible');
     }
-
-    // Start observing elements
-    startObserving();
 });
 
 // Handle scroll events for navbar
