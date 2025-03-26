@@ -116,6 +116,54 @@ function startObserving() {
             observer.observe(job);
         });
     }
+
+    // Project cards animation
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach((card, index) => {
+        // Set initial state
+        card.style.opacity = '0';
+        card.style.transform = index % 2 === 0 
+            ? 'translateX(-100px)' 
+            : 'translateX(100px)';
+        
+        // Create intersection observer for each card
+        const cardObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Animate card when it comes into view
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                        cardObserver.unobserve(entry.target);
+                        
+                        // Add hover effect after card is visible
+                        entry.target.addEventListener('mousemove', (e) => {
+                            const rect = entry.target.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            
+                            const xPercent = ((x / rect.width) - 0.5) * 20;
+                            const yPercent = ((y / rect.height) - 0.5) * 20;
+                            
+                            entry.target.style.transform = `
+                                translateY(-10px)
+                                rotateX(${-yPercent}deg)
+                                rotateY(${xPercent}deg)
+                                scale(1.02)
+                            `;
+                        });
+                        
+                        entry.target.addEventListener('mouseleave', () => {
+                            entry.target.style.transform = 'translateX(0)';
+                        });
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+        
+        cardObserver.observe(card);
+    });
 }
 
 // Initial setup
