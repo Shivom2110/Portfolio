@@ -3,277 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shivom Vinayak Raskar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Shivom Vinayak Raskar — Software Engineer</title>
+    <meta name="description" content="Portfolio of Shivom Vinayak Raskar, a Computer Science & Engineering student at the University of Toledo building software across embedded systems, data platforms, and machine learning.">
+    <link rel="icon" href="images/intro image.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=NTR&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <!-- Intro Screen - Outside main content -->
-    <div class="intro-screen">
-        <div class="logo-container">
-            <div class="logo">
-                <img src="images/intro image.jpg" alt="Geometric Logo" class="geometric-logo">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#top" class="nav-logo">
+                <img src="images/intro image.jpg" alt="SR monogram">
+                <span>Shivom Raskar</span>
+            </a>
+
+            <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+
+            <div class="nav-links" id="nav-links">
+                <a href="#about">About</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+                <div class="nav-socials">
+                    <a href="https://github.com/Shivom2110" target="_blank" rel="noreferrer noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/shivom-vr" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:shivom192003@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
             </div>
         </div>
-        <div class="scroll-indicator">SCROLL DOWN</div>
-    </div>
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        <nav id="navbar">
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        
-        <header>
-            <div class="content">
-                <h1>Shivom Vinayak Raskar</h1>
-                <p>Innovating Intelligence</p>
-                <a href="#about" class="button">Learn More</a>
+    </nav>
+
+    <header class="hero" id="top">
+        <div class="container hero-grid">
+            <div class="hero-visual" aria-hidden="true">
+                <canvas class="dot-portrait" id="dot-portrait" data-src="images/hero-portrait.json"></canvas>
+                <noscript><img class="dot-portrait" src="images/hero-portrait.png" alt=""></noscript>
             </div>
-        </header>
-        
-        <!-- About Section -->
-        <section id="about">
+            <div class="hero-text">
+                <p class="eyebrow">Hi, my name is</p>
+                <h1>Shivom Raskar<span class="cursor">|</span></h1>
+                <p class="hero-desc">I'm a Computer Science &amp; Engineering student at the University of Toledo. I build software across embedded systems, enterprise data platforms, and machine learning — currently supporting IT infrastructure for 20,000+ users at UToledo.</p>
+                <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Say Hello</a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- About -->
+        <section id="about" class="section">
             <div class="container">
-                <div class="section-title">
-                    <h2>About Me</h2>
-                    <p>Passionate computer science student with a focus on innovative technologies</p>
-                </div>
-                
-                <div class="about-content">
-                    <div class="about-text fade-in">
-                        <p><strong>Education:</strong> The University of Toledo, College of Engineering, Toledo, OH<br>
-                        Bachelor of Science: Computer Science and Engineering<br>
-                        GPA: 3.6 (Anticipated Graduation: December 2026)</p>
-                        <p><strong>Honors & Awards:</strong> Hactober Fest hackathon 2 consecutive years special mentions, Dean's List, Judges' Choice Award and People's Choice Award for Showcase on Face Mask Detection Project</p>
-                        <p>I'm a dedicated computer science student with a passion for solving complex problems through technology. My academic journey has equipped me with strong foundations in software development, machine learning, and creative problem-solving.</p>
+                <h2 class="section-heading"><span class="slash">/</span> about me <span class="rule"></span></h2>
+
+                <div class="section-body">
+                    <p>I'm a dedicated Computer Science &amp; Engineering student with a passion for solving complex problems through technology. My work spans embedded control software, enterprise data engineering, and applied machine learning — I like projects that force me to move between hardware, backend logic, and data.</p>
+                    <p>Since December 2023, I've worked as an <strong>IT Engineer</strong> at the University of Toledo, and I've spent internships building data pipelines and dashboards at Surventis and integrating hardware and software for test systems at R.W. Beckett.</p>
+
+                    <h3 class="mini-heading">Technologies I've been working with</h3>
+
+                    <div class="tech-category">
+                        <p class="tech-category-label">Languages</p>
+                        <ul class="tech-list">
+                            <li>Python</li><li>Java</li><li>C</li>
+                            <li>C++</li><li>C#</li><li>JavaScript</li>
+                            <li>SQL</li>
+                        </ul>
                     </div>
-                    
-                    <div class="skills-container fade-in">
-                        <div class="skill-card">
-                            <i class="fas fa-brain"></i>
-                            <span>Machine Learning</span>
+
+                    <div class="tech-category">
+                        <p class="tech-category-label">ML &amp; Data</p>
+                        <ul class="tech-list">
+                            <li>TensorFlow</li><li>Keras</li><li>Pandas</li>
+                            <li>NumPy</li><li>OpenCV</li><li>Jupyter Notebook</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-category">
+                        <p class="tech-category-label">Tools &amp; Platforms</p>
+                        <ul class="tech-list">
+                            <li>Git</li><li>Microsoft Azure</li><li>Databricks</li>
+                            <li>SAP</li><li>Vegam</li><li>Data Acquisition Systems</li>
+                        </ul>
+                    </div>
+
+                    <div class="tech-category">
+                        <p class="tech-category-label">Systems</p>
+                        <ul class="tech-list">
+                            <li>Raspberry Pi</li><li>Arduino</li><li>Linux</li>
+                            <li>Unity</li><li>Jetson Orin</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="mini-heading">Education</h3>
+                    <p><strong>B.S. in Computer Science and Engineering</strong> — The University of Toledo, College of Engineering, Toledo, OH <span class="muted">(Graduating Dec 2026)</span></p>
+                    <p><strong>Coursework:</strong> Embedded &amp; Operating Systems, Data Science, Data Communication, Database Management</p>
+                    <p><strong>Certifications:</strong> Machine Learning Specialization, Introduction to C# &amp; Unity</p>
+                    <p><strong>Recognitions:</strong> RocketHacks Organizer &amp; Mentor, Hacktoberfest hackathon — two consecutive years of special mention, Dean's List, Award for the Face Mask Detection Project showcase</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-heading"><span class="slash">/</span> experience <span class="rule"></span></h2>
+
+                <div class="tabs" id="experience-tabs">
+                    <div class="tab-list" role="tablist" aria-label="Work experience" aria-orientation="vertical">
+                        <button class="tab-button active" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true" tabindex="0" data-tab="0">
+                            University of&nbsp;Toledo
+                        </button>
+                        <button class="tab-button" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1" data-tab="1">
+                            Surventis
+                        </button>
+                        <button class="tab-button" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" data-tab="2">
+                            R.W.&nbsp;Beckett
+                        </button>
+                    </div>
+
+                    <div class="tab-panels">
+                        <div class="tab-panel active" role="tabpanel" id="panel-0" aria-labelledby="tab-0" data-panel="0">
+                            <h3>Information Technology Engineer II <span class="panel-org">@ University of Toledo</span></h3>
+                            <p class="panel-date">DECEMBER 2023 — PRESENT</p>
+                            <ul>
+                                <li>Efficiently provide technical support to end-users, swiftly diagnosing and resolving hardware and software issues to minimize downtime.</li>
+                                <li>Implement TPM security measures, conduct audits, and maintain comprehensive documentation for effective troubleshooting and knowledge sharing.</li>
+                            </ul>
                         </div>
-                        <div class="skill-card">
-                            <i class="fab fa-python"></i>
-                            <span>Python</span>
+
+                        <div class="tab-panel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" data-panel="1" hidden>
+                            <h3>Data Scientist Intern <span class="panel-org">@ Surventis</span></h3>
+                            <p class="panel-date">JUNE 2026 — AUGUST 2026 · GREENVILLE, OH</p>
+                            <ul>
+                                <li>Engineered SQL queries in Databricks to extract, join, and transform raw SAP and Vegam datasets into structured tables for KPI reporting and analysis.</li>
+                                <li>Analyzed enterprise data structures and created data models from raw source tables when required datasets did not exist, enabling downstream analytics and Power BI reporting.</li>
+                                <li>Developed Power BI KPI dashboards and translated stakeholder requirements into data-driven visualizations to improve operational visibility and streamline utilities reporting.</li>
+                            </ul>
                         </div>
-                        <div class="skill-card">
-                            <i class="fab fa-java"></i>
-                            <span>Java</span>
-                        </div>
-                        <div class="skill-card">
-                            <i class="fab fa-react"></i>
-                            <span>React</span>
-                        </div>
-                        <div class="skill-card">
-                            <i class="fab fa-js"></i>
-                            <span>JavaScript</span>
-                        </div>
-                        <div class="skill-card">
-                            <i class="fab fa-html5"></i>
-                            <span>HTML & CSS</span>
-                        </div>
-                        <div class="skill-card">
-                            <i class="fas fa-database"></i>
-                            <span>Database Management</span>
-                        </div>
-                        <div class="skill-card">
-                            <i class="fab fa-git-alt"></i>
-                            <span>Git</span>
-                        </div>
-                        <div class="skill-card">
-                            <i class="fab fa-windows"></i>
-                            <span>Microsoft Azure AD</span>
-                        </div>
-                        <div class="skill-card">
-                            <i class="fab fa-linux"></i>
-                            <span>Linux/Ubuntu</span>
-                        </div>
+
+                        <div class="tab-panel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" data-panel="2" hidden>
+                            <h3>Software Engineering Intern <span class="panel-org">@ R.W. Beckett</span></h3>
+                            <p class="panel-date">AUGUST 2024 — AUGUST 2025 · ELYRIA, OH</p>
+                            <ul>
+                                <li>Set up and managed databases, test stand I/O devices, and data acquisition systems — including oscilloscopes and measurement tools — while integrating physical hardware with software logic.</li>
+                                <li>Strengthened C programming skills, contributed to GeniSys Control, and performed unit testing and debugging.</li>
+                                <li>Developed Python automation scripts for a Raspberry Pi 4 to streamline the process and improve efficiency.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Projects Section -->
-        <section id="projects">
+
+        <!-- Projects -->
+        <section id="projects" class="section">
             <div class="container">
-                <div class="section-title">
-                    <h2>Projects</h2>
-                    <p>Showcasing my technical skills and creativity</p>
-                </div>
-                
+                <h2 class="section-heading"><span class="slash">/</span> projects <span class="rule"></span></h2>
+
                 <div class="projects-grid">
-                    <div class="project-card fade-in">
-                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1569012871812-f38ee64cd54c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="project-content">
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-photo" src="images/projects/lawn-mower.jpg" alt="" loading="lazy">
+                            <div class="project-image-fallback"><i class="fas fa-tractor"></i></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Autonomous Lawn Mower</h3>
+                            <p class="project-meta">Dana &amp; Alisson · Jan 2026</p>
+                            <p>Embedded control software for a 48V electric, semi-autonomous lawnmower — built in Arduino, covering motor control, safety logic, and system integration with mechanical and electrical teams.</p>
+                            <ul class="tag-list">
+                                <li>Arduino</li><li>Embedded C++</li><li>Motor Control</li><li>Safety Systems</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-photo" src="images/projects/ai-npcs.jpg" alt="" loading="lazy">
+                            <div class="project-image-fallback"><i class="fas fa-gamepad"></i></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>AI-Driven NPCs for Immersive Gaming</h3>
+                            <p class="project-meta">University of Toledo · Jan 2026</p>
+                            <p>Adaptive NPC and boss AI systems in Unity (C#) that modify behavior based on player interaction patterns, with rule-based learning that scales combat difficulty at low latency.</p>
+                            <ul class="tag-list">
+                                <li>Unity</li><li>C#</li><li>Game AI</li><li>Systems Design</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-photo" src="images/projects/ai-resiliency.jpg" alt="" loading="lazy">
+                            <div class="project-image-fallback"><i class="fas fa-shield-halved"></i></div>
+                        </div>
+                        <div class="project-body">
+                            <h3>Measuring Resiliency of AI/ML Algorithms</h3>
+                            <p class="project-meta">University of Toledo · Aug 2025</p>
+                            <p>Evaluated a MNIST CNN (90% baseline accuracy) for resilience against Fast Gradient Sign Method (FGSM) adversarial attacks — accuracy dropped from 80% to under 10% as perturbation strength increased.</p>
+                            <ul class="tag-list">
+                                <li>TensorFlow</li><li>Adversarial ML</li><li>CNN</li><li>Python</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-photo" src="images/projects/face-mask-detection.jpg" alt="" loading="lazy">
+                            <div class="project-image-fallback"><i class="fas fa-head-side-mask"></i></div>
+                        </div>
+                        <div class="project-body">
                             <h3>Face Mask Detection</h3>
-                            <p>Developed a face mask detection model utilizing Machine Learning algorithms and TensorFlow. Programmed and implemented the machine learning algorithm to effectively detect the presence of face masks.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">TensorFlow</span>
-                                <span class="project-tag">Machine Learning</span>
-                                <span class="project-tag">Computer Vision</span>
-                            </div>
+                            <p class="project-meta">University of Toledo</p>
+                            <p>A computer vision model built with TensorFlow to detect the presence of face masks in real time — earned a Judges' and People's Choice Award at the university showcase.</p>
+                            <ul class="tag-list">
+                                <li>TensorFlow</li><li>Machine Learning</li><li>Computer Vision</li>
+                            </ul>
                         </div>
-                    </div>
-                    
-                    <div class="project-card fade-in">
-                        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');"></div>
-                        <div class="project-content">
-                            <h3>Hand Gestured Control Bot</h3>
-                            <p>Spearheaded the development of a Hand Gesture Bot, leveraging Arduino Nano, MPU6050 sensor, RF transmitter-receiver pair, and L293D motor driver.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Arduino</span>
-                                <span class="project-tag">Robotics</span>
-                                <span class="project-tag">Hardware</span>
-                                <span class="project-tag">Sensors</span>
-                            </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-photo" src="images/projects/hand-gesture-bot.jpg" alt="" loading="lazy">
+                            <div class="project-image-fallback"><i class="fas fa-hand"></i></div>
                         </div>
-                    </div>
-                    
-                    <div class="project-card fade-in">
-                        <div class="project-image" style="background-image: url('images/intro image.jpg');"></div>
-                        <div class="project-content">
+                        <div class="project-body">
+                            <h3>Hand Gesture Control Bot</h3>
+                            <p class="project-meta">Personal Project</p>
+                            <p>A gesture-controlled robot built with an Arduino Nano, MPU6050 sensor, an RF transmitter-receiver pair, and an L293D motor driver.</p>
+                            <ul class="tag-list">
+                                <li>Arduino</li><li>Robotics</li><li>Sensors</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img class="project-photo" src="images/projects/portfolio-website.jpg" alt="" loading="lazy">
+                            <div class="project-image-fallback"><i class="fas fa-window-maximize"></i></div>
+                        </div>
+                        <div class="project-body">
                             <h3>Immersive Portfolio Website</h3>
-                            <p>Designed and developed a modern portfolio website featuring a dark theme, smooth animations, and responsive design. Built with semantic HTML5, custom CSS3 animations, and vanilla JavaScript for optimal performance.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">HTML5</span>
-                                <span class="project-tag">CSS3</span>
-                                <span class="project-tag">JavaScript</span>
-                                <span class="project-tag">Responsive Design</span>
-                            </div>
+                            <p class="project-meta">Personal Project</p>
+                            <p>This site — a hand-built portfolio with a dark theme, smooth scroll animations, and a fully responsive layout using semantic HTML5, custom CSS3, and vanilla JavaScript.</p>
+                            <ul class="tag-list">
+                                <li>HTML5</li><li>CSS3</li><li>JavaScript</li>
+                            </ul>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
-                <!-- Experience Section -->
-                <section id="experience">
-                    <div class="container">
-                        <div class="section-title">
-                            <h2>Experience</h2>
-                            <p>My professional journey and contributions</p>
-                        </div>
-                        
-                        <div class="experience-timeline">
-                            <div class="job fade-in">
-                                <div class="job-content">
-                                    <span class="job-date">November 2023 - Present</span>
-                                    <h3>Information Technology Engineer II</h3>
-                                    <p>University of Toledo Engineering College, Toledo, OH</p>
-                                    <ul>
-                                        <li>Improving VMware infrastructure for over 20,000 users through Microsoft Azure AD and PowerShell scripting.</li>
-                                        <li>Deploy OS images to new staff and lab devices via PXE for efficient, network-based setup.</li>
-                                        <li>Helping reduces a backlog of Termination reports, which aids in reducing incoming ticket count by 20%.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <div class="job fade-in">
-                                <div class="job-content">
-                                    <span class="job-date">August 2024 - December 2024</span>
-                                    <h3>Software Engineer</h3>
-                                    <p>R.W. Beckett, Cleveland, OH</p>
-                                    <ul>
-                                        <li>Set up and managed databases, test stand I/O devices, and data acquisition systems, including oscilloscopes and measurement tools.</li>
-                                        <li>Strengthened C programming skills, contributed to GeniSys Control, and performed unit testing and bug resolution.</li>
-                                        <li>Gained expertise in operating systems, PLCs, and integrating physical hardware with software logic.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <div class="job fade-in">
-                                <div class="job-content">
-                                    <span class="job-date">January 2023 - May 2023</span>
-                                    <h3>Mentor</h3>
-                                    <p>University of Toledo, Toledo, OH</p>
-                                    <ul>
-                                        <li>Set up coding projects and activities, facilitating practical application of knowledge and aiding during challenges.</li>
-                                        <li>Established a positive and collaborative classroom environment, promoting mutual respect and candid communication.</li>
-                                        <li>Guided and supported students in understanding Java concepts, offering clarification and encouragement for improved teamwork.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <div class="job fade-in">
-                                <div class="job-content">
-                                    <span class="job-date">2022 - 2023</span>
-                                    <h3>Lab Instructor</h3>
-                                    <p>University of Toledo, Toledo, OH</p>
-                                    <ul>
-                                        <li>Guided students in understanding Java concepts and practical coding exercises.</li>
-                                        <li>Fostered teamwork and encouraged engagement through projects and activities.</li>
-                                        <li>Created a collaborative classroom environment.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <div class="job fade-in">
-                                <div class="job-content">
-                                    <span class="job-date">12/2021 – 06/2022</span>
-                                    <h3>Instructor at Trusity</h3>
-                                    <p>Dubai, UAE</p>
-                                    <ul>
-                                        <li>Taught coding to young individuals and fostered creativity in a safe environment.</li>
-                                        <li>Upskilled students in HTML, CSS, JavaScript, and Python.</li>
-                                        <li>Helped students build web applications and products.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="scroll-hint fade-in">
-                            <i class="fas fa-arrow-down"></i>
-                            <span>Scroll to see more</span>
-                        </div>
-                    </div>
-                </section>
-                
-        
-        <!-- Contact Section -->
-        <section id="contact">
+
+        <!-- Contact -->
+        <section id="contact" class="section section-contact">
             <div class="container">
-                <div class="section-title">
-                    <h2>Contact</h2>
-                    <p>Let's connect and discuss opportunities</p>
-                </div>
-                
-                <div class="contact-info">
-                    <div class="contact-item fade-in">
-                        <i class="fas fa-envelope"></i>
-                        <h3>Email</h3>
-                        <a href="mailto:shivom192003@gmail.com">shivom192003@gmail.com</a>
-                    </div>
-                    
-                    <div class="contact-item fade-in">
-                        <i class="fas fa-phone"></i>
-                        <h3>Phone</h3>
-                        <a href="tel:4193785262">419-378-5262</a>
-                    </div>
-                    
-                    <div class="contact-item fade-in">
-                        <i class="fab fa-linkedin"></i>
-                        <h3>LinkedIn</h3>
-                        <a href="https://www.linkedin.com/in/shivom-vr-69495420" target="_blank">Connect on LinkedIn</a>
-                    </div>
-                </div>
+                <h2 class="section-heading centered"><span class="slash">/</span> get in touch</h2>
+                <p class="contact-copy">I'm always open to conversations about software, data, and interesting problems to work on. The fastest way to reach me is email.</p>
+                <a href="mailto:shivom192003@gmail.com" class="btn"><i class="fas fa-envelope"></i> Say Hello</a>
+
+                <ul class="contact-links">
+                    <li><i class="fas fa-phone"></i> <a href="tel:4193785262">419-378-5262</a></li>
+                    <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/shivom-vr" target="_blank" rel="noreferrer noopener">linkedin.com/in/shivom-vr</a></li>
+                    <li><i class="fab fa-github"></i> <a href="https://github.com/Shivom2110" target="_blank" rel="noreferrer noopener">github.com/Shivom2110</a></li>
+                    <li><i class="fas fa-location-dot"></i> Toledo, OH</li>
+                </ul>
             </div>
         </section>
-        
-        <!-- Footer -->
+
         <footer>
-            <div class="social-links">
-                <a href="https://github.com/Shivom2110" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/shivom-vr-69495420" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:shivom192003@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p>&copy; Shivom Vinayak Raskar. All rights reserved.</p>
+            <p>Designed &amp; built by Shivom Vinayak Raskar.</p>
+            <p>&copy; <span id="year"></span> All rights reserved.</p>
         </footer>
-    </div>
-    
+    </main>
+
     <script src="js/main.js"></script>
 </body>
-</html> 
+</html>
