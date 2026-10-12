@@ -1,0 +1,93 @@
+---
+interface Props {
+    text: string;
+    href: string;
+    ariaLabel: string;
+    sublabel?: string;
+    id: string;
+    variant?: 'light' | 'dark';
+}
+const { text, href, ariaLabel, sublabel, id, variant = 'light' } = Astro.props;
+---
+
+<div class:list={['badge-wrap', variant]}>
+    <a href={href} class="badge" aria-label={ariaLabel}>
+        <svg class="badge-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id={`circle-${id}`} d="M60,60 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>
+            <text><textPath href={`#circle-${id}`} data-badge-text={text}></textPath></text>
+        </svg>
+        <span class="badge-arrow" aria-hidden="true">&#8599;</span>
+    </a>
+    {sublabel && <span class="badge-sublabel">{sublabel}</span>}
+</div>
+
+<style>
+    .badge-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .badge {
+        position: relative;
+        width: 108px;
+        height: 108px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+    }
+    .badge-ring {
+        position: absolute;
+        inset: 0;
+        animation: badge-spin 16s linear infinite;
+    }
+    .badge-ring text {
+        font-size: 8.2px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+    .badge-arrow {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        transition: transform 0.25s var(--ease-out-expo);
+    }
+    .badge:hover .badge-arrow { transform: scale(1.12) rotate(8deg); }
+    .badge:hover .badge-ring { animation-play-state: paused; }
+
+    .badge-sublabel {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.6;
+    }
+
+    .badge-wrap.light .badge-ring text { fill: var(--color-black-type); }
+    .badge-wrap.light .badge-arrow { background: var(--color-black-type); color: var(--color-cream); }
+    .badge-wrap.light .badge-sublabel { color: var(--color-black-type); }
+
+    .badge-wrap.dark .badge-ring text { fill: var(--color-text); }
+    .badge-wrap.dark .badge-arrow { background: var(--color-gold); color: var(--color-ink); }
+    .badge-wrap.dark .badge-sublabel { color: var(--color-text-muted); }
+
+    @keyframes badge-spin { to { transform: rotate(360deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+        .badge-ring { animation: none; }
+    }
+</style>
+
+<script>
+    document.querySelectorAll('[data-badge-text]').forEach(el => {
+        if (el.textContent) return; // already filled (e.g. after view-transition swap)
+        const base = (el as HTMLElement).dataset.badgeText ?? '';
+        el.textContent = (base + ' • ').repeat(4);
+    });
+</script>

@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Fonts — self-hosted, subset to latin, variable Manrope for one file
+   covering every weight we use.
+   ========================================================================== */
+@font-face {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/anton-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Manrope';
+    font-style: normal;
+    font-weight: 200 800;
+    font-display: swap;
+    src: url('/fonts/manrope-variable.woff2') format('woff2-variations');
+}
+
+@font-face {
+    font-family: 'Archivo Black';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/archivo-black-400.woff2') format('woff2');
+}
+
+/* ==========================================================================
+   Design tokens — Tailwind v4 CSS-first theme. Refined from the 15
+   reference frames (see Phase 2 notes); gold is the single accent.
+   ========================================================================== */
+@theme {
+    --color-ink: #0b0b0b;
+    --color-ink-2: #141414;
+    --color-ink-3: #1b1b1b;
+    --color-line: rgba(255, 255, 255, 0.07);
+    --color-cream: #ece4da;
+    --color-cream-2: #e2d8ca;
+    --color-gold: #c2a56e;
+    --color-gold-bright: #d4ba86;
+    --color-text: #f2f0ec;
+    --color-text-muted: #7a7772;
+    --color-black-type: #0d0d0d;
+
+    --font-condensed: 'Anton', 'Arial Narrow', sans-serif;
+    --font-wide: 'Archivo Black', 'Arial Black', sans-serif;
+    --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+* { box-sizing: border-box; }
+
+html {
+    scroll-behavior: auto; /* Lenis drives smooth scroll in JS */
+}
+
+body {
+    background: var(--color-ink);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+}
+
+::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--color-gold);
+    color: var(--color-ink);
+    padding: 0.75rem 1.5rem;
+    z-index: 1000;
+    font-weight: 700;
+}
+.skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+}
+
+:focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Preloader
+   ========================================================================== */
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#preloader.is-done { display: none; }
+
+.preloader-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s var(--ease-standard);
+}
+.preloader-content.is-hidden { opacity: 0; }
+
+.preloader-count {
+    font-family: var(--font-condensed);
+    font-size: 3.5rem;
+    color: var(--color-gold);
+    letter-spacing: -0.02em;
+}
+.preloader-ring {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    transform: rotate(-90deg);
+}
+.preloader-ring circle {
+    fill: none;
+    stroke-width: 1.5;
+}
+.ring-track { stroke: var(--color-line); }
+.ring-progress {
+    stroke: var(--color-gold);
+    stroke-dasharray: 264;
+    stroke-dashoffset: 264;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.1s linear;
+}
+
+.preloader-wipe {
+    position: fixed;
+    inset: 0;
+    background: var(--color-cream);
+    clip-path: circle(0% at 50% 50%);
+    pointer-events: none;
+}
+.preloader-wipe.is-revealing {
+    clip-path: circle(150% at 50% 50%);
+    transition: clip-path 0.9s var(--ease-out-expo);
+}
+
+.custom-cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.25s var(--ease-out-expo), height 0.25s var(--ease-out-expo);
+}
+.custom-cursor.is-grown {
+    width: 44px;
+    height: 44px;
+}
+
+@media (pointer: coarse) {
+    .custom-cursor { display: none; }
+}
+
+[data-reveal-section] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+[data-reveal-section].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

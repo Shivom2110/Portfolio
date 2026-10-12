@@ -1,0 +1,212 @@
+---
+const stats = [
+    { label: 'Based', value: 'Toledo, OH' },
+    { label: 'Focus', value: 'Embedded / ML / Data' },
+    { label: 'Experience', value: 'IT Engineer II since 2023' },
+    { label: 'Users supported', value: '20,000+' },
+    { label: 'Graduating', value: 'December 2026' },
+    { label: 'Mindset', value: 'TODO(shivom)' },
+];
+---
+
+<section id="about" class="about" data-reveal-section data-nav-theme="dark">
+    <h2 class="about-title">About Me</h2>
+    <div class="about-rule" aria-hidden="true"></div>
+
+    <div class="about-grid">
+        <div class="portrait-card">
+            <canvas class="portrait-canvas" data-dot-portrait data-src="/images/hero-portrait.json" data-color="194,165,110" role="img" aria-label="Portrait of Shivom Vinayak Raskar, rendered as an animated dot matrix"></canvas>
+            <noscript><img src="/images/profile.jpeg" alt="Shivom Vinayak Raskar" class="portrait-fallback-img" /></noscript>
+            <span class="portrait-name">Shivom Raskar</span>
+            <div class="portrait-socials">
+                <a href="https://github.com/Shivom2110" target="_blank" rel="noreferrer noopener" aria-label="GitHub">
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/shivom-vr" target="_blank" rel="noreferrer noopener" aria-label="LinkedIn">
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M14.82 0H1.18C.53 0 0 .52 0 1.17v13.66C0 15.48.53 16 1.18 16h13.64c.65 0 1.18-.52 1.18-1.17V1.17C16 .52 15.47 0 14.82 0zM4.75 13.62H2.37V6.1h2.38v7.52zM3.56 5.07c-.76 0-1.38-.62-1.38-1.38 0-.76.62-1.38 1.38-1.38.76 0 1.38.62 1.38 1.38 0 .76-.61 1.38-1.38 1.38zm10.06 8.55h-2.37V9.96c0-.88-.02-2.01-1.23-2.01-1.23 0-1.42.96-1.42 1.95v3.72H6.24V6.1h2.28v1.03h.03c.32-.6 1.09-1.23 2.25-1.23 2.4 0 2.84 1.58 2.84 3.64v4.08z"/></svg>
+                </a>
+                <a href="mailto:shivom192003@gmail.com" aria-label="Email">
+                    <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M1.5 3A1.5 1.5 0 0 0 0 4.5v7A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5v-7A1.5 1.5 0 0 0 14.5 3h-13zM1 4.5l7 4.5 7-4.5V5l-7 4.5L1 5v-.5z"/></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="about-copy">
+            <p class="eyebrow">&mdash; WHO AM I</p>
+            <h3 class="about-headline">
+                I BUILD SOFTWARE WHERE <span class="gold">HARDWARE</span>, <span class="gold">DATA</span> AND <span class="gold">MACHINE LEARNING</span> MEET.
+            </h3>
+
+            <div class="about-columns">
+                <p>I'm a Computer Science &amp; Engineering student at the University of Toledo, graduating December 2026. My work spans embedded control software, enterprise data platforms, and applied machine learning — I like projects that force me to move between hardware, backend logic, and data.</p>
+                <p>Since December 2023, I've worked as an IT Engineer at the University of Toledo, supporting infrastructure for 20,000+ users. I've also spent internships building data pipelines at Surventis, and integrating hardware and software for test systems at R.W. Beckett.</p>
+            </div>
+
+            <div class="about-divider" aria-hidden="true"></div>
+
+            <dl class="stats-grid">
+                {stats.map(stat => (
+                    <div class="stat">
+                        <dt>{stat.label}</dt>
+                        <dd>{stat.value}</dd>
+                    </div>
+                ))}
+            </dl>
+        </div>
+    </div>
+</section>
+
+<style>
+    .about {
+        background: var(--color-ink);
+        color: var(--color-text);
+        padding: 7rem 2rem;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .about-title {
+        text-align: center;
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+    .about-rule {
+        width: 64px;
+        height: 2px;
+        background: var(--color-gold);
+        margin: 1.25rem auto 4rem;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .portrait-card {
+        position: relative;
+        border-radius: var(--radius-md, 14px);
+        overflow: hidden;
+        background: var(--color-ink-2);
+        aspect-ratio: 3 / 4;
+        max-width: 360px;
+        margin: 0 auto;
+    }
+    .portrait-card img,
+    .portrait-canvas {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        display: block;
+    }
+    /* Only the no-JS <img> fallback zooms on hover -- the live canvas does
+       its own thing instead (dots spring away from the cursor), and a CSS
+       zoom on top of that would fight the dot physics. */
+    .portrait-card img {
+        transition: transform 0.6s var(--ease-out-expo);
+        transform-origin: top center;
+    }
+    .portrait-card:hover img,
+    .portrait-card:focus-within img {
+        transform: scale(1.22) translateY(2%);
+    }
+    .portrait-name {
+        position: absolute;
+        top: 1rem; left: 1rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.3s var(--ease-standard), transform 0.3s var(--ease-standard);
+    }
+    .portrait-card:hover .portrait-name,
+    .portrait-card:focus-within .portrait-name {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .portrait-socials {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    .portrait-socials a {
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(4px);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--color-text);
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: background 0.25s var(--ease-standard);
+    }
+    .portrait-socials a:hover { background: var(--color-gold); color: var(--color-ink); }
+
+    .eyebrow {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: var(--color-text-muted);
+        margin: 0 0 1rem;
+    }
+
+    .about-headline {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: clamp(1.6rem, 4vw, 2.6rem);
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        margin: 0 0 2rem;
+    }
+    .gold { color: var(--color-gold); }
+
+    .about-columns {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        color: var(--color-text-muted);
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    .about-divider {
+        height: 1px;
+        background: var(--color-line);
+        margin: 2.5rem 0;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem 2rem;
+        margin: 0;
+    }
+    .stat dt {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        margin-bottom: 0.35rem;
+    }
+    .stat dd { margin: 0; font-weight: 600; font-size: 0.95rem; }
+
+    @media (min-width: 900px) {
+        .about-grid { grid-template-columns: 340px 1fr; gap: 4rem; }
+        .about-columns { grid-template-columns: 1fr 1fr; }
+        .stats-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+</style>

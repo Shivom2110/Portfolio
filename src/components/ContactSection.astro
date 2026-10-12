@@ -1,0 +1,256 @@
+---
+const rows = [
+    { label: 'Email me', value: 'shivom192003@gmail.com', href: 'mailto:shivom192003@gmail.com' },
+    { label: 'Connect', value: 'LinkedIn', href: 'https://www.linkedin.com/in/shivom-vr' },
+    { label: 'Based in', value: 'Toledo, OH', href: null },
+];
+---
+
+<section id="contact" class="contact" data-reveal-section data-nav-theme="dark">
+    <span class="contact-bg-word" aria-hidden="true">CONTACT</span>
+
+    <div class="contact-grid">
+        <div class="contact-left">
+            <p class="contact-pill">&#9993; Contact</p>
+            <h2 class="contact-heading">
+                Got something<br />
+                <span class="gold">worth building?</span><br />
+                Let's talk.
+            </h2>
+            <p class="contact-subtext">Have a role, a project, or just a technical question? I'd love to hear from you.</p>
+
+            <ul class="contact-rows">
+                {rows.map(row => (
+                    <li>
+                        {row.href ? (
+                            <a href={row.href} target={row.href.startsWith('http') ? '_blank' : undefined} rel={row.href.startsWith('http') ? 'noreferrer noopener' : undefined}>
+                                <span class="row-label">{row.label}</span>
+                                <span class="row-value">{row.value}</span>
+                                <span class="row-arrow" aria-hidden="true">&#8599;</span>
+                            </a>
+                        ) : (
+                            <div class="contact-row-static">
+                                <span class="row-label">{row.label}</span>
+                                <span class="row-value">{row.value}</span>
+                            </div>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </div>
+
+        <form class="contact-form" id="contact-form" data-contact-form novalidate>
+            <div class="field">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Tell me a bit about your project." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+                <span class="btn-label">Send Message</span>
+                <span aria-hidden="true">&#8599;</span>
+            </button>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        </form>
+    </div>
+</section>
+
+<style>
+    .contact {
+        position: relative;
+        background: var(--color-ink);
+        color: var(--color-text);
+        padding: 7rem 2rem;
+        overflow: hidden;
+    }
+
+    .contact-bg-word {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--font-wide);
+        font-size: clamp(6rem, 22vw, 18rem);
+        color: var(--color-gold);
+        opacity: 0.05;
+        white-space: nowrap;
+        pointer-events: none;
+        user-select: none;
+    }
+    .contact::before {
+        content: '';
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60vw; height: 60vw;
+        max-width: 700px; max-height: 700px;
+        background: radial-gradient(circle, var(--color-gold) 0%, transparent 70%);
+        opacity: 0.08;
+        pointer-events: none;
+    }
+
+    .contact-grid {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .contact-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border: 1px solid var(--color-line);
+        border-radius: 999px;
+        padding: 0.5rem 1rem;
+        margin: 0 0 2rem;
+        width: fit-content;
+    }
+
+    .contact-heading {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: clamp(2rem, 5.5vw, 3.6rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin: 0 0 1.5rem;
+    }
+    .gold { color: var(--color-gold); }
+
+    .contact-subtext {
+        color: var(--color-text-muted);
+        max-width: 40ch;
+        line-height: 1.6;
+        margin: 0 0 2.5rem;
+    }
+
+    .contact-rows { list-style: none; margin: 0; padding: 0; }
+    .contact-rows li { border-top: 1px solid var(--color-line); }
+    .contact-rows li:last-child { border-bottom: 1px solid var(--color-line); }
+    .contact-rows a, .contact-row-static {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.1rem 0.25rem;
+        text-decoration: none;
+        color: var(--color-text);
+    }
+    .row-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        width: 90px;
+        flex-shrink: 0;
+    }
+    .row-value { font-weight: 600; }
+    .row-arrow { margin-left: auto; opacity: 0.5; transition: opacity 0.25s var(--ease-standard), transform 0.25s var(--ease-standard); }
+    .contact-rows a:hover .row-arrow { opacity: 1; transform: translate(2px, -2px); color: var(--color-gold); }
+
+    .contact-form {
+        background: var(--color-ink-2);
+        border-radius: 16px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+    .field { display: flex; flex-direction: column; gap: 0.5rem; }
+    .field label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+    }
+    .field input, .field textarea {
+        background: var(--color-ink-3);
+        border: 1px solid var(--color-line);
+        border-radius: 10px;
+        padding: 0.85rem 1rem;
+        color: var(--color-text);
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        resize: vertical;
+    }
+    .field input:focus, .field textarea:focus {
+        outline: none;
+        border-color: var(--color-gold);
+    }
+
+    .submit-btn {
+        background: var(--color-text);
+        color: var(--color-ink);
+        border: none;
+        border-radius: 10px;
+        padding: 1rem;
+        font-family: var(--font-sans);
+        font-weight: 700;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: transform 0.25s var(--ease-out-expo), background 0.25s var(--ease-standard);
+    }
+    .submit-btn:hover { transform: translateY(-2px); background: var(--color-gold-bright); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .form-status {
+        font-size: 0.82rem;
+        color: var(--color-text-muted);
+        min-height: 1.2em;
+        margin: 0;
+    }
+    .form-status[data-state="success"] { color: var(--color-gold); }
+    .form-status[data-state="error"] { color: #e07a7a; }
+
+    @media (min-width: 900px) {
+        .contact-grid { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    }
+</style>
+
+<script>
+    // No backend is configured yet (brief leaves Formspree/Resend/Vercel as a
+    // TODO pending the user's choice), so this validates and falls back to a
+    // pre-filled mailto: -- it degrades to a real working path either way.
+    const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+    const status = form?.querySelector<HTMLElement>('[data-form-status]');
+
+    form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+        const name = String(data.get('name') || '').trim();
+        const email = String(data.get('email') || '').trim();
+        const message = String(data.get('message') || '').trim();
+
+        if (!name || !email || !message) {
+            if (status) { status.textContent = 'Please fill in every field.'; status.dataset.state = 'error'; }
+            return;
+        }
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!emailOk) {
+            if (status) { status.textContent = 'That email address doesn’t look right.'; status.dataset.state = 'error'; }
+            return;
+        }
+
+        const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+        const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+        window.location.href = `mailto:shivom192003@gmail.com?subject=${subject}&body=${body}`;
+
+        if (status) { status.textContent = 'Opening your email client…'; status.dataset.state = 'success'; }
+    });
+</script>

@@ -1,0 +1,132 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CircularBadge from '../../components/CircularBadge.astro';
+
+export async function getStaticPaths() {
+    const projects = await getCollection('projects');
+    return projects.map(project => ({
+        params: { slug: project.id },
+        props: { project },
+    }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout
+    title={`${project.data.title} — Shivom Raskar`}
+    description={project.data.summary}
+>
+    <article class="case-study">
+        <header class="case-hero">
+            <p class="case-eyebrow">&mdash; {project.data.org ?? 'Project'} {project.data.date && `· ${project.data.date}`}</p>
+            <h1>{project.data.title}</h1>
+            <ul class="case-tags">
+                {project.data.tags.map(tag => <li>{tag}</li>)}
+            </ul>
+            <div class="case-badge">
+                <CircularBadge
+                    id="case-study"
+                    text="BACK TO PROJECTS •"
+                    href="/#projects"
+                    ariaLabel="Back to all projects"
+                    variant="dark"
+                />
+            </div>
+        </header>
+
+        <div class="case-body">
+            <Content />
+        </div>
+
+        {project.data.repoUrl && (
+            <p class="case-repo">
+                <a href={project.data.repoUrl} target="_blank" rel="noreferrer noopener">View the repo on GitHub &#8599;</a>
+            </p>
+        )}
+    </article>
+</BaseLayout>
+
+<style>
+    .case-study {
+        background: var(--color-ink);
+        color: var(--color-text);
+        padding: 9rem 2rem 6rem;
+    }
+    .case-hero {
+        max-width: 760px;
+        margin: 0 auto 4rem;
+        position: relative;
+    }
+    .case-eyebrow {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        margin: 0 0 1rem;
+    }
+    .case-hero h1 {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: clamp(2.2rem, 6vw, 4rem);
+        letter-spacing: -0.02em;
+        line-height: 1.05;
+        margin: 0 0 1.5rem;
+    }
+    .case-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+    .case-tags li {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        background: rgba(194, 165, 110, 0.1);
+        border-radius: 999px;
+        padding: 0.4rem 0.9rem;
+    }
+
+    .case-badge { display: none; }
+
+    .case-body {
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.75;
+        color: var(--color-text-muted);
+    }
+    .case-body :global(h2) {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: 1.4rem;
+        color: var(--color-text);
+        margin: 3rem 0 1rem;
+        letter-spacing: -0.01em;
+    }
+    .case-body :global(h2:first-child) { margin-top: 0; }
+    .case-body :global(p) { margin: 0 0 1.25rem; }
+
+    .case-repo {
+        max-width: 700px;
+        margin: 3rem auto 0;
+        text-align: center;
+    }
+    .case-repo a {
+        color: var(--color-gold);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    .case-repo a:hover { text-decoration: underline; }
+
+    @media (min-width: 700px) {
+        .case-badge { display: block; position: absolute; right: 0; top: 0; }
+    }
+</style>

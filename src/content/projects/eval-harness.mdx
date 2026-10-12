@@ -1,0 +1,29 @@
+---
+title: LLM Eval Harness with CI Regression Gating
+summary: A zero-cost eval harness for an LLM ticket classifier, with GitHub Actions blocking any pull request that regresses accuracy.
+tags: [Python, LLM Evals, CI/CD, pytest]
+featured: true
+order: 2
+repoUrl: https://github.com/Shivom2110/eval-harness
+---
+
+## Problem
+
+Shipping an LLM-backed feature — a customer-support ticket classifier — without any way to catch quality regressions before they reach production.
+
+## Constraints
+
+- Zero budget: no paid API, no paid CI minutes.
+- The metric had to be unambiguous enough to gate a merge on automatically, not something that needs a human or an LLM judge to interpret.
+
+## What I built
+
+A classifier running Llama 3.2 (3B) locally through Ollama — no API key, no account, no cost — forced into structured JSON output from a fixed label set (`billing`, `technical`, `account`, `shipping`, `other`) so every response can be scored automatically. The harness runs it against a hand-written golden dataset of 30 tickets (6 per label), computes accuracy and per-label recall, and GitHub Actions runs it on every pull request.
+
+## Key decision & tradeoff
+
+I picked a classifier over a more "impressive" generative task like summarization specifically because its correctness is binary against a known label, not because it's more interesting to build — it's more trustworthy to gate a merge on. A summarizer would need fuzzy scoring (an LLM judge or text similarity), which is harder to explain and to trust in a CI check. The tradeoff is a narrower demo: this harness proves a classifier is safe to ship, not that any LLM feature can be gated this cheaply.
+
+## Result
+
+Two pass/fail rules enforced on every pull request: accuracy must be at or above 0.80, and it can't drop more than 0.05 below the last accepted baseline. With 30 tickets, that's roughly one flip tolerated — a second flip fails the check and blocks the merge.

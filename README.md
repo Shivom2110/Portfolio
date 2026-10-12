@@ -1,120 +1,61 @@
-# Personal Portfolio Website
+# Shivom Vinayak Raskar — Portfolio
 
-A modern, responsive portfolio website showcasing my professional experience, projects, and skills. The website features a sleek dark theme with smooth animations and interactive elements.
+A personal portfolio built in Astro + TypeScript + Tailwind CSS (v4), with GSAP/ScrollTrigger and Lenis for motion. Design direction follows a luxury-editorial reference (cream hero, near-black sections, single gold accent) captured in the Phase 2 chat history — not checked into this repo.
 
-## Features
+## Stack
 
-- **Modern Dark Theme**: Elegant dark color scheme with glowing accents
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Smooth Animations**: 
-  - Fade-in animations on scroll
-  - Interactive hover effects
-  - Smooth scrolling navigation
-- **Sections**:
-  - Intro screen with animated logo
-  - About Me with skills showcase
-  - Experience timeline
-  - Project showcase
-  - Contact information
+- **Astro** (static output) + TypeScript
+- **Tailwind CSS v4** (CSS-first config via `@theme` in `src/styles/global.css`)
+- **GSAP + ScrollTrigger** for the project-stack scroll effect
+- **Lenis** for smooth scroll
+- Content collections (`src/content/projects/*.mdx`) for case studies
+- Self-hosted, subsetted fonts (`public/fonts/`): Anton (hero word), Archivo Black (WORK), Manrope (everything else)
 
-## Technologies Used
+## Commands
 
-- HTML5
-- CSS3 (Custom properties, Flexbox, Grid)
-- JavaScript (ES6+)
-- Font Awesome 6.4.0 for icons
-- Inter font family from Google Fonts
-- Intersection Observer API for scroll animations
-
-## Setup and Installation
-
-1. Clone the repository:
 ```bash
-git clone [repository-url]
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # static output to dist/
+npm run preview  # preview the production build
+npx astro check  # TypeScript diagnostics
 ```
 
-2. Navigate to the project directory:
-```bash
-cd [project-directory]
+## Adding a project
+
+Add one `.mdx` file to `src/content/projects/`. Frontmatter schema is defined in `src/content.config.ts`:
+
+```yaml
+---
+title: Project Name
+summary: One-sentence summary shown on project cards.
+org: Optional — company/org/context
+date: "2026-01"          # optional
+tags: [Tag One, Tag Two]
+featured: true            # true = gets the full sticky-stack case-study card on the homepage; false = compact list
+order: 1                  # sort order within its group
+repoUrl: https://github.com/Shivom2110/repo-name   # optional
+---
+
+## Problem
+## Constraints
+## What I built
+## Key decision & tradeoff
+## Result
 ```
 
-3. Start a local server:
-```bash
-python3 -m http.server
-```
+Only `featured: true` projects get the five-section case-study treatment above; everything else can just be a sentence or two — see `src/content/projects/hand-gesture-bot.mdx` for a minimal example. A `featured: true` project also gets its own page at `/work/<filename-without-extension>` automatically (`src/pages/work/[slug].astro`).
 
-4. Open your browser and visit:
-```
-http://localhost:8000
-```
+## Known TODOs
 
-## Project Structure
+Search the codebase for `TODO(shivom)` — currently:
+- `astro.config.mjs` — `site` is a placeholder domain, swap for the real one once picked
+- `src/content/projects/lawn-mower.mdx` — needs a real "Result" (bench-tested? on the mower? field data?)
+- `src/content/projects/planetsos-backend.mdx` — needs one line on what prompted the project
+- `src/components/About.astro` — the "Mindset" stat in the stats grid has no value yet
+- Contact form (`src/components/ContactSection.astro`) currently falls back to a pre-filled `mailto:` — no backend (Formspree/Resend/Vercel function) is wired up yet
+- `/resume.pdf` is not yet linked anywhere — no file has been supplied
 
-```
-portfolio/
-├── index.html              # Main HTML file
-├── styles/
-│   └── main.css           # Main stylesheet
-├── js/
-│   └── main.js            # JavaScript functionality
-├── images/                # Image assets
-└── sections/             # HTML section components
-    ├── about.html
-    ├── experience.html
-    ├── projects.html
-    ├── contact.html
-    └── footer.html
-```
+## Deploy
 
-## Customization
-
-### Colors
-The website uses CSS custom properties for easy color customization. Main colors can be modified in `styles/main.css`:
-
-```css
-:root {
-    --primary: #5bbfba;
-    --primary-dark: #48a09c;
-    --bg-dark: #000000;
-    --bg-medium: #111111;
-    --bg-light: #1a1a1a;
-    --text-light: #ffffff;
-    --text-muted: #888888;
-}
-```
-
-### Content
-- Update personal information in `index.html`
-- Modify section content in respective files under the `sections/` directory
-- Add/remove skills in `sections/about.html`
-- Update projects in `sections/projects.html`
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-
-## Performance Optimization
-
-- Optimized images
-- Efficient CSS animations
-- Lazy loading for images
-- Minimal JavaScript usage
-- No external dependencies except Font Awesome and Google Fonts
-
-## Contributing
-
-Feel free to fork this project and customize it for your own use. If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request.
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Contact
-
-Shivom Vinayak Raskar
-- Email: shivom192003@gmail.com
-- LinkedIn: [Shivom VR](https://www.linkedin.com/in/shivom-vr-69495420)
-- GitHub: [Shivom2110](https://github.com/Shivom2110) 
+No deploy config has been added yet (Vercel, per the original brief, but nothing is wired up). `npm run build` produces a static `dist/` that any static host can serve.

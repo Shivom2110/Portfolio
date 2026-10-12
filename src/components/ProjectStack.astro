@@ -1,0 +1,223 @@
+---
+import { getCollection } from 'astro:content';
+import CircularBadge from './CircularBadge.astro';
+
+const allProjects = await getCollection('projects');
+const featured = allProjects.filter(p => p.data.featured).sort((a, b) => a.data.order - b.data.order);
+const rest = allProjects.filter(p => !p.data.featured).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="projects" class="projects-section" data-reveal-section data-nav-theme="dark">
+    <p class="projects-eyebrow">My Work</p>
+
+    <div class="project-stack" data-stack>
+        {featured.map((project, i) => (
+            <article class="project-card" data-stack-card style={`z-index:${i + 1}`}>
+                <div class="project-card-bg" aria-hidden="true"></div>
+                <div class="project-card-inner">
+                    <p class="project-eyebrow">&mdash; {project.id} &middot; 0{i + 1}</p>
+                    <h3>{project.data.title}</h3>
+                    <p class="project-summary">{project.data.summary}</p>
+                    <ul class="project-tags">
+                        {project.data.tags.map(tag => <li>{tag}</li>)}
+                    </ul>
+                    <div class="project-badge">
+                        <CircularBadge
+                            id={`project-${project.id}`}
+                            text="VIEW CASE STUDY •"
+                            href={`/work/${project.id}`}
+                            ariaLabel={`View case study: ${project.data.title}`}
+                            variant="dark"
+                        />
+                    </div>
+                </div>
+            </article>
+        ))}
+    </div>
+
+    <h3 class="more-heading">More Projects</h3>
+    <ul class="compact-list">
+        {rest.map(project => (
+            <li>
+                <div class="compact-info">
+                    <h4>{project.data.title}</h4>
+                    <p>{project.data.summary}</p>
+                    <ul class="project-tags small">
+                        {project.data.tags.map(tag => <li>{tag}</li>)}
+                    </ul>
+                </div>
+                {project.data.repoUrl && (
+                    <a href={project.data.repoUrl} target="_blank" rel="noreferrer noopener" class="compact-link" aria-label={`${project.data.title} on GitHub`}>&#8599;</a>
+                )}
+            </li>
+        ))}
+    </ul>
+</section>
+
+<style>
+    .projects-section {
+        background: var(--color-ink);
+        color: var(--color-text);
+        padding: 6rem 0 2rem;
+    }
+    .projects-eyebrow {
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        margin: 0 0 2.5rem;
+    }
+
+    .project-stack {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .project-card {
+        position: sticky;
+        top: 6rem;
+        border-radius: 20px;
+        overflow: hidden;
+        min-height: 60vh;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 2.5rem;
+        transform-origin: top center;
+        will-change: transform, filter;
+    }
+
+    .project-card-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, var(--color-ink-2), #0a0a0a);
+        opacity: 0.9;
+    }
+
+    .project-card-inner {
+        position: relative;
+        z-index: 1;
+        padding: 2.5rem;
+        width: 100%;
+    }
+
+    .project-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        margin: 0 0 0.75rem;
+    }
+    .project-card-inner h3 {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        letter-spacing: -0.02em;
+        margin: 0 0 1rem;
+    }
+    .project-summary {
+        color: var(--color-text-muted);
+        max-width: 48ch;
+        line-height: 1.6;
+        margin: 0 0 1.5rem;
+    }
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        list-style: none;
+        margin: 0 0 2rem;
+        padding: 0;
+    }
+    .project-tags li {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border: 1px solid var(--color-line);
+        border-radius: 999px;
+        padding: 0.4rem 0.85rem;
+        color: var(--color-text-muted);
+    }
+    .project-tags.small li { padding: 0.3rem 0.7rem; font-size: 0.65rem; }
+
+    .project-badge {
+        position: absolute;
+        right: 1.5rem;
+        bottom: 1.5rem;
+    }
+
+    .more-heading {
+        text-align: center;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        margin: 5rem 0 2rem;
+    }
+
+    .compact-list {
+        list-style: none;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        border-top: 1px solid var(--color-line);
+    }
+    .compact-list li {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.75rem 0;
+        border-bottom: 1px solid var(--color-line);
+    }
+    .compact-info h4 { margin: 0 0 0.5rem; font-size: 1.05rem; font-weight: 700; }
+    .compact-info p { margin: 0 0 0.75rem; color: var(--color-text-muted); font-size: 0.88rem; line-height: 1.5; max-width: 60ch; }
+    .compact-link {
+        margin-left: auto;
+        flex-shrink: 0;
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--color-line);
+        display: flex; align-items: center; justify-content: center;
+        color: var(--color-text);
+        text-decoration: none;
+        transition: border-color 0.25s var(--ease-standard), transform 0.25s var(--ease-standard);
+    }
+    .compact-link:hover { border-color: var(--color-gold); transform: translate(2px, -2px); color: var(--color-gold); }
+
+    @media (min-width: 700px) {
+        .project-card-inner { padding: 4rem; }
+    }
+</style>
+
+<script>
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const cards = gsap.utils.toArray<HTMLElement>('[data-stack-card]');
+        cards.forEach((card, i) => {
+            const next = cards[i + 1];
+            if (!next) return;
+            ScrollTrigger.create({
+                trigger: next,
+                start: 'top bottom',
+                end: 'top top',
+                scrub: true,
+                onUpdate: (self) => {
+                    const scale = 1 - self.progress * 0.08;
+                    const brightness = 1 - self.progress * 0.45;
+                    card.style.transform = `scale(${scale})`;
+                    card.style.filter = `brightness(${brightness})`;
+                },
+            });
+        });
+    }
+</script>

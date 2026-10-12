@@ -1,0 +1,151 @@
+---
+import CircularBadge from './CircularBadge.astro';
+---
+
+<header class="hero" id="top" data-nav-theme="light">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <filter id="liquidFilter" x="-30%" y="-30%" width="160%" height="160%">
+                <feTurbulence id="liquidTurbulence" type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="2" seed="7" result="noise" />
+                <feDisplacementMap id="liquidDisplace" in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <h1 class="liquid-word-wrap" data-liquid>
+        <span class="visually-hidden">Shivom Raskar, Software Engineer</span>
+        <span class="liquid-word liquid-word--base" aria-hidden="true">SOFTWARE</span>
+        <span class="liquid-word liquid-word--fx" aria-hidden="true">SOFTWARE</span>
+    </h1>
+    <p class="hero-sub">ENGINEER</p>
+    <p class="hero-micro">
+        <span>EMBEDDED</span><span aria-hidden="true">&bull;</span><span>DATA</span><span aria-hidden="true">&bull;</span><span>MACHINE LEARNING</span>
+    </p>
+    <a href="#about" class="scroll-cue" data-scroll-link>
+        <span>Scroll to explore</span>
+        <span class="scroll-cue-line"></span>
+    </a>
+
+    <div class="hero-badge">
+        <CircularBadge
+            id="hero"
+            text="OPEN TO NEW GRAD ROLES • 2027"
+            href="#contact"
+            ariaLabel="Open to new-grad software engineering roles starting 2027 — go to contact"
+            sublabel="Based in Toledo, OH"
+            variant="light"
+        />
+    </div>
+</header>
+
+<style>
+    .hero {
+        min-height: 100svh;
+        background: var(--color-cream);
+        color: var(--color-black-type);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 8rem 2rem 6rem;
+        position: relative;
+    }
+
+    .liquid-word-wrap {
+        position: relative;
+        display: inline-block;
+        cursor: default;
+        margin: 0;
+    }
+
+    .liquid-word {
+        display: block;
+        font-family: var(--font-condensed);
+        font-size: clamp(4.5rem, 16vw, 13rem);
+        line-height: 0.82;
+        letter-spacing: -0.01em;
+        color: var(--color-black-type);
+        white-space: nowrap;
+        user-select: none;
+    }
+
+    .liquid-word--fx {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        filter: url(#liquidFilter);
+        -webkit-mask-image: radial-gradient(circle var(--liquid-r, 0px) at var(--liquid-x, 50%) var(--liquid-y, 50%), black 0%, black 55%, transparent 100%);
+                mask-image: radial-gradient(circle var(--liquid-r, 0px) at var(--liquid-x, 50%) var(--liquid-y, 50%), black 0%, black 55%, transparent 100%);
+    }
+
+    .hero-sub {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: clamp(1.5rem, 4.5vw, 3rem);
+        letter-spacing: -0.02em;
+        margin: 0.25rem 0 0;
+    }
+
+    .hero-micro {
+        margin: 1.5rem 0 0;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(13, 13, 13, 0.55);
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .scroll-cue {
+        margin-top: 2rem;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(13, 13, 13, 0.55);
+        text-decoration: none;
+    }
+    .scroll-cue-line {
+        width: 1px;
+        height: 28px;
+        background: rgba(13, 13, 13, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    .scroll-cue-line::after {
+        content: '';
+        position: absolute;
+        left: 0; top: -100%;
+        width: 100%; height: 100%;
+        background: var(--color-black-type);
+        animation: scrollDrip 1.8s var(--ease-standard) infinite;
+    }
+    @keyframes scrollDrip {
+        0% { top: -100%; }
+        60% { top: 100%; }
+        100% { top: 100%; }
+    }
+
+    .hero-badge {
+        position: absolute;
+        right: 2rem;
+        bottom: 2rem;
+        z-index: 10;
+    }
+
+    @media (max-width: 760px) {
+        .hero-badge { right: 1.25rem; bottom: 1.25rem; }
+        .hero-badge :global(.badge) { width: 84px; height: 84px; }
+        .hero-badge :global(.badge-arrow) { width: 28px; height: 28px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .scroll-cue-line::after { animation: none; }
+    }
+</style>

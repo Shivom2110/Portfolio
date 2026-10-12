@@ -1,0 +1,78 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+    title: string;
+    description: string;
+    ogImage?: string;
+}
+
+const { title, description, ogImage = '/images/profile.jpeg' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Shivom Vinayak Raskar',
+    jobTitle: 'Software Engineer',
+    url: Astro.site?.toString(),
+    email: 'mailto:shivom192003@gmail.com',
+    address: { '@type': 'PostalAddress', addressLocality: 'Toledo', addressRegion: 'OH' },
+    sameAs: [
+        'https://github.com/Shivom2110',
+        'https://www.linkedin.com/in/shivom-vr',
+    ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" href="/images/monogram.jpg" type="image/jpeg" />
+    <link rel="canonical" href={canonicalURL} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href="/fonts/anton-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/manrope-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/archivo-black-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <div id="preloader" aria-hidden="true">
+        <div class="preloader-content">
+            <span class="preloader-count" data-preloader-count>0%</span>
+            <svg class="preloader-ring" viewBox="0 0 100 100">
+                <circle class="ring-track" cx="50" cy="50" r="42" />
+                <circle class="ring-progress" cx="50" cy="50" r="42" data-preloader-ring-progress />
+            </svg>
+        </div>
+        <div class="preloader-wipe" data-preloader-wipe></div>
+    </div>
+    <div id="cursor-root" aria-hidden="true"></div>
+
+    <Nav />
+    <main id="main-content">
+        <slot />
+    </main>
+    <Footer />
+
+    <script>
+        import '../scripts/app';
+    </script>
+</body>
+</html>

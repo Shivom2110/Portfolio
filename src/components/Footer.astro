@@ -1,0 +1,46 @@
+---
+const links = [
+    { href: 'https://github.com/Shivom2110', label: 'GitHub' },
+    { href: 'https://www.linkedin.com/in/shivom-vr', label: 'LinkedIn' },
+    { href: 'mailto:shivom192003@gmail.com', label: 'Email' },
+];
+---
+
+<footer class="site-footer">
+    <div class="footer-links">
+        {links.map(link => (
+            <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer noopener' : undefined}>
+                {link.label}
+            </a>
+        ))}
+    </div>
+    <p>Designed &amp; built by Shivom Vinayak Raskar.</p>
+    <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
+</footer>
+
+<style>
+    .site-footer {
+        background: var(--color-ink);
+        color: var(--color-text-muted);
+        text-align: center;
+        padding: 3rem 1.5rem 4rem;
+        font-size: 0.8rem;
+    }
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .footer-links a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        transition: color 0.25s var(--ease-standard);
+    }
+    .footer-links a:hover { color: var(--color-gold); }
+    .site-footer p { margin: 0.25rem 0; }
+</style>

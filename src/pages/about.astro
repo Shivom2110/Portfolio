@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const timeline = [
+    {
+        role: 'Information Technology Engineer II',
+        org: 'University of Toledo',
+        date: 'December 2023 — Present',
+        points: [
+            'Provide technical support across hardware and software issues for infrastructure serving 20,000+ users.',
+            'Implement TPM security measures, conduct audits, and maintain documentation for effective troubleshooting.',
+        ],
+    },
+    {
+        role: 'Data Scientist Intern',
+        org: 'Surventis, Greenville, OH',
+        date: 'June 2026 — August 2026',
+        points: [
+            'Engineered SQL queries in Databricks to transform raw SAP and Vegam datasets into structured tables for KPI reporting.',
+            'Built data models from raw source tables where none existed, and developed Power BI dashboards translating stakeholder requirements into visualizations.',
+        ],
+    },
+    {
+        role: 'Software Engineering Intern',
+        org: 'R.W. Beckett, Elyria, OH',
+        date: 'August 2024 — August 2025',
+        points: [
+            'Set up databases, test stand I/O devices, and data acquisition systems, integrating physical hardware with software logic.',
+            'Strengthened C programming skills, contributed to GeniSys Control, and performed unit testing and debugging.',
+        ],
+    },
+];
+
+const education = {
+    school: 'The University of Toledo, College of Engineering',
+    degree: 'B.S. in Computer Science and Engineering',
+    date: 'Graduating December 2026',
+    coursework: ['Embedded & Operating Systems', 'Data Science', 'Data Communication', 'Database Management'],
+    certifications: ['Machine Learning Specialization', 'Introduction to C# & Unity'],
+};
+
+const recognitions = [
+    'RocketHacks Organizer & Mentor',
+    'Hacktoberfest hackathon — two consecutive years of special mention',
+    "Dean's List",
+    'Judges’ & People’s Choice Award, Face Mask Detection Project showcase',
+];
+---
+
+<BaseLayout
+    title="About — Shivom Raskar"
+    description="Education, experience, and recognition for Shivom Vinayak Raskar, a Computer Science & Engineering student at the University of Toledo."
+>
+    <article class="about-page">
+        <header class="about-page-hero">
+            <p class="eyebrow">&mdash; About</p>
+            <h1>I'm looking for a new-grad software engineering role, starting 2027.</h1>
+            <p class="lede">I'm a Computer Science &amp; Engineering student at the University of Toledo, graduating December 2026. I build software across embedded systems, enterprise data platforms, and machine learning — and I'm looking for a team where I can keep doing that.</p>
+        </header>
+
+        <section class="about-page-section">
+            <h2>Education</h2>
+            <div class="edu-card">
+                <div class="edu-head">
+                    <strong>{education.degree}</strong>
+                    <span>{education.date}</span>
+                </div>
+                <p>{education.school}</p>
+                <p><strong>Coursework:</strong> {education.coursework.join(', ')}</p>
+                <p><strong>Certifications:</strong> {education.certifications.join(', ')}</p>
+            </div>
+        </section>
+
+        <section class="about-page-section">
+            <h2>Experience</h2>
+            <div class="timeline">
+                {timeline.map(job => (
+                    <div class="timeline-item">
+                        <div class="timeline-head">
+                            <h3>{job.role}</h3>
+                            <span class="timeline-date">{job.date}</span>
+                        </div>
+                        <p class="timeline-org">{job.org}</p>
+                        <ul>
+                            {job.points.map(point => <li>{point}</li>)}
+                        </ul>
+                    </div>
+                ))}
+            </div>
+        </section>
+
+        <section class="about-page-section">
+            <h2>Recognition</h2>
+            <ul class="recognition-list">
+                {recognitions.map(item => <li>{item}</li>)}
+            </ul>
+        </section>
+    </article>
+</BaseLayout>
+
+<style>
+    .about-page {
+        background: var(--color-ink);
+        color: var(--color-text);
+        padding: 9rem 2rem 6rem;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+    .eyebrow {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        margin: 0 0 1rem;
+    }
+    .about-page-hero h1 {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        margin: 0 0 1.5rem;
+    }
+    .lede { color: var(--color-text-muted); line-height: 1.7; margin: 0 0 4rem; }
+
+    .about-page-section { margin-bottom: 4rem; }
+    .about-page-section h2 {
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        margin: 0 0 1.5rem;
+    }
+
+    .edu-card {
+        background: var(--color-ink-2);
+        border-radius: 14px;
+        padding: 1.75rem;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+    }
+    .edu-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--color-text);
+    }
+    .edu-card p { margin: 0.4rem 0; }
+    .edu-card strong { color: var(--color-text); }
+
+    .timeline-item { padding-bottom: 2.5rem; border-bottom: 1px solid var(--color-line); margin-bottom: 2.5rem; }
+    .timeline-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .timeline-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; align-items: baseline; }
+    .timeline-head h3 { font-size: 1.1rem; font-weight: 700; margin: 0; }
+    .timeline-date { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; color: var(--color-text-muted); white-space: nowrap; }
+    .timeline-org { color: var(--color-text-muted); font-size: 0.9rem; margin: 0.3rem 0 1rem; }
+    .timeline-item ul { margin: 0; padding-left: 1.25rem; color: var(--color-text-muted); line-height: 1.6; }
+    .timeline-item li { margin-bottom: 0.5rem; }
+
+    .recognition-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+    .recognition-list li {
+        position: relative;
+        padding-left: 1.4rem;
+        color: var(--color-text-muted);
+        line-height: 1.5;
+    }
+    .recognition-list li::before { content: '\2726'; position: absolute; left: 0; color: var(--color-gold); font-size: 0.8rem; }
+</style>

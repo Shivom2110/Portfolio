@@ -1,0 +1,32 @@
+---
+title: Autonomous Lawn Mower
+summary: Manual-drive controller firmware for a 48V semi-autonomous mower, replacing a laptop and PCAN adapter with an Arduino GIGA on an isolated CAN bus.
+org: Dana & Alisson
+date: "2026-01"
+tags: [Arduino, CAN Bus, Embedded C++, Safety Systems]
+featured: true
+order: 1
+repoUrl: https://github.com/Shivom2110/dana-mower-firmware
+---
+
+## Problem
+
+The mower's four Dana TM4 AC-X1 inverters — two driving the deck motors, two driving the wheels — were being bench-tested from a laptop running PCAN adapter scripts. That setup proved the motor-control logic worked, but it wasn't something that could ship on the machine itself.
+
+## Constraints
+
+- A real hardware safety contract: a 12V ignition line, a normally-closed E-stop, and a deck-motor switch, none of which could touch the GIGA's pins directly. Each needed conditioning down to a protected 3.3V input that fails safely if the E-stop circuit breaks.
+- An isolated CAN bus with exactly two 120Ω terminators — one at the controller, one at the final inverter — with every intermediate inverter's terminator left disabled.
+- The inverters run Dana's TAU Generic Slave firmware and only understand the exact byte layout defined in Dana's DBC file — there's no room for an approximate encoding.
+
+## What I built
+
+Firmware for an Arduino GIGA R1 WiFi that takes over from the laptop: it streams RPDO1–RPDO4 to every configured inverter every 10ms, staggered 1ms apart, at 250kbit/s, and matches the inverters' 100ms RPDO timeout so they fail safely on their own if the GIGA stops or resets. Every frame is encoded to match what `cantools` produces from the DBC, verified byte-for-byte against the proven laptop scripts before any of it touched real hardware.
+
+## Key decision & tradeoff
+
+Power sequencing follows a fixed state machine — request Power Ready Direct while ignition is on and the E-stop is released, otherwise force a return to Startup — rather than letting the inverters' own state reporting drive the logic. That's less flexible, but it means the firmware's behavior under a fault is deterministic and auditable instead of depending on inverter-reported state that could itself be wrong during the fault.
+
+## Result
+
+TODO(shivom): current status — bench-verified, mounted on the mower, or field-tested? Any measured outcome (drive time, reliability) worth stating here.

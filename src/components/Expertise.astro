@@ -1,0 +1,248 @@
+---
+const rows = [
+    {
+        title: 'Embedded Systems',
+        desc: 'Hardware safety contracts, motor control, and protocol work close to the metal.',
+        tags: ['Arduino', 'C++', 'CAN Bus'],
+        icons: [
+            { label: 'C++', bg: '#00599c' },
+            { label: 'Ard', bg: '#00878f' },
+        ],
+    },
+    {
+        title: 'Data Platforms',
+        desc: 'SQL pipelines and dashboards that turn raw enterprise data into something usable.',
+        tags: ['SQL', 'Databricks', 'Power BI'],
+        icons: [
+            { label: 'SQL', bg: '#4479a1' },
+            { label: 'DBX', bg: '#ff3621' },
+        ],
+    },
+    {
+        title: 'Machine Learning',
+        desc: 'Computer vision and adversarial robustness work, built and evaluated end to end.',
+        tags: ['TensorFlow', 'Python', 'OpenCV'],
+        icons: [
+            { label: 'TF', bg: '#ff6f00' },
+            { label: 'Py', bg: '#3776ab' },
+        ],
+    },
+    {
+        title: 'Game Systems & AI',
+        desc: 'Adaptive NPC behavior in Unity, with AI logic kept modular from gameplay code.',
+        tags: ['Unity', 'C#'],
+        icons: [
+            { label: 'U', bg: '#000000' },
+            { label: 'C#', bg: '#9b4f96' },
+        ],
+    },
+];
+---
+
+<section id="expertise" class="expertise" data-reveal-section data-nav-theme="dark">
+    <div class="expertise-grid">
+        <div class="expertise-intro">
+            <p class="index-label">02 &mdash; Expertise</p>
+            <h2>MY<br />EXPERTISE</h2>
+            <p class="expertise-sentence">I design and build software where <span class="gold">hardware</span>, <span class="gold">data</span>, and <span class="gold">motion</span> work as one.</p>
+            <p class="expertise-body">From embedded control loops to adversarial ML evaluation, I combine firmware-level thinking with product-level design to build experiences that feel deliberate.</p>
+            <ul class="chip-row">
+                <li>C / C++</li><li>Python</li><li>SQL</li><li>Unity</li><li>TensorFlow</li>
+            </ul>
+        </div>
+
+        <div class="expertise-list">
+            {rows.map((row, i) => (
+                <div class="expertise-row" data-row>
+                    <div class="row-icon" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
+                    <div class="row-body">
+                        <h3>{row.title}</h3>
+                        <p>{row.desc}</p>
+                        <ul class="row-tags">
+                            {row.tags.map(tag => <li>{tag}</li>)}
+                        </ul>
+                    </div>
+                    <span class="row-arrow" aria-hidden="true">&#8599;</span>
+
+                    <div class="floating-icons" aria-hidden="true">
+                        {row.icons.map((icon, j) => (
+                            <span class="float-icon" style={`--bg:${icon.bg}; --i:${j}`}>{icon.label}</span>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .expertise {
+        background: var(--color-ink);
+        color: var(--color-text);
+        padding: 7rem 2rem;
+        max-width: 1280px;
+        margin: 0 auto;
+        position: relative;
+        background-image: repeating-linear-gradient(to right, var(--color-line) 0, var(--color-line) 1px, transparent 1px, transparent 120px);
+    }
+
+    .expertise-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .index-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        margin-bottom: 1.5rem;
+    }
+
+    .expertise-intro h2 {
+        font-family: var(--font-sans);
+        font-weight: 800;
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        margin: 0 0 1.5rem;
+        text-transform: uppercase;
+    }
+    .gold { color: var(--color-gold); }
+
+    .expertise-sentence {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0 0 1rem;
+    }
+    .expertise-body {
+        color: var(--color-text-muted);
+        font-size: 0.92rem;
+        line-height: 1.7;
+        margin: 0 0 2rem;
+    }
+
+    .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+    .chip-row li {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border: 1px solid var(--color-line);
+        border-radius: 999px;
+        padding: 0.45rem 0.9rem;
+        color: var(--color-text-muted);
+    }
+
+    .expertise-list {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid var(--color-line);
+    }
+
+    .expertise-row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding: 1.75rem 1.25rem;
+        border-bottom: 1px solid var(--color-line);
+        border-left: 2px solid transparent;
+        transition: background-color 0.3s var(--ease-standard), border-color 0.3s var(--ease-standard);
+    }
+    .expertise-row:hover {
+        background: var(--color-ink-2);
+        border-left-color: var(--color-gold);
+    }
+
+    .row-icon {
+        font-family: var(--font-sans);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--color-text-muted);
+        width: 2.5rem;
+        flex-shrink: 0;
+    }
+
+    .row-body h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin: 0 0 0.4rem;
+    }
+    .row-body p {
+        color: var(--color-text-muted);
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin: 0 0 0.75rem;
+        max-width: 42ch;
+    }
+    .row-tags {
+        display: flex;
+        gap: 0.5rem;
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+    .row-tags li {
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        opacity: 0.85;
+    }
+
+    .row-arrow {
+        margin-left: auto;
+        font-size: 1.1rem;
+        opacity: 0.4;
+        transition: opacity 0.3s var(--ease-standard), transform 0.3s var(--ease-standard);
+        flex-shrink: 0;
+    }
+    .expertise-row:hover .row-arrow { opacity: 1; transform: translate(2px, -2px); }
+
+    .floating-icons {
+        position: absolute;
+        right: 3rem;
+        top: 50%;
+        pointer-events: none;
+    }
+    .float-icon {
+        position: absolute;
+        top: 50%; left: 0;
+        transform: translate(0, -50%) scale(0.4) rotate(0deg);
+        width: 36px; height: 36px;
+        border-radius: 8px;
+        background: var(--bg);
+        color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 0.6rem;
+        font-weight: 800;
+        opacity: 0;
+        transition: transform 0.45s var(--ease-out-expo), opacity 0.45s var(--ease-out-expo);
+        transition-delay: calc(var(--i) * 0.05s);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+    }
+    .expertise-row:hover .float-icon {
+        opacity: 1;
+        transform:
+            translate(calc(var(--i) * -56px - 20px), calc(-50% + (var(--i) * 10px - 10px)))
+            scale(1)
+            rotate(calc(var(--i) * 14deg - 7deg));
+    }
+
+    @media (min-width: 900px) {
+        .expertise-grid { grid-template-columns: 1fr 1.4fr; gap: 4rem; }
+    }
+
+    @media (max-width: 640px) {
+        .floating-icons { display: none; }
+    }
+</style>

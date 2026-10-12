@@ -1,0 +1,154 @@
+---
+const tools = ['JavaScript', 'React', 'Lenis', 'GSAP', 'Python', 'HTML'];
+const marquee = ['EMBEDDED SYSTEMS', 'MACHINE LEARNING', 'DATA ENGINEERING', 'GAME AI'];
+---
+
+<section class="work-intro" data-reveal-section data-nav-theme="dark">
+    <div class="tool-row" aria-hidden="true">
+        {tools.map(tool => <span>{tool}</span>)}
+    </div>
+
+    <p class="scroll-label">Scroll to explore my</p>
+
+    <div class="work-word-wrap" data-work-word>
+        <span class="work-word">WORK</span>
+        <div class="droplets" aria-hidden="true">
+            {Array.from({ length: 6 }).map((_, i) => (
+                <span class="droplet" style={`--d:${i}`}></span>
+            ))}
+        </div>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            {[...marquee, ...marquee].map(item => (
+                <span>{item} <i>+</i></span>
+            ))}
+        </div>
+    </div>
+</section>
+
+<style>
+    .work-intro {
+        background: var(--color-ink);
+        color: var(--color-text);
+        padding: 6rem 0 4rem;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .tool-row {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        padding: 0 2rem;
+        margin-bottom: 4rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        opacity: 0.45;
+    }
+
+    .scroll-label {
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--color-gold);
+        margin: 0 0 1rem;
+    }
+
+    .work-word-wrap {
+        position: relative;
+        display: inline-block;
+    }
+
+    .work-word {
+        font-family: var(--font-wide);
+        font-size: clamp(5rem, 20vw, 14rem);
+        line-height: 0.85;
+        color: var(--color-gold);
+        letter-spacing: -0.01em;
+        display: inline-block;
+        clip-path: inset(0 100% 0 0);
+    }
+    .work-word.revealed {
+        clip-path: inset(0 0 0 0);
+        transition: clip-path 1.1s var(--ease-out-expo);
+    }
+
+    .droplets {
+        position: absolute;
+        bottom: -10px;
+        left: 0; right: 0;
+        height: 60px;
+        pointer-events: none;
+    }
+    .droplet {
+        position: absolute;
+        bottom: 0;
+        left: calc(var(--d) * 17% + 4%);
+        width: 10px; height: 10px;
+        border-radius: 50%;
+        background: var(--color-gold);
+        opacity: 0;
+    }
+    .work-word-wrap.revealed .droplet {
+        animation: drip 1.6s var(--ease-standard) calc(var(--d) * 0.12s + 0.6s) 1 both;
+    }
+    @keyframes drip {
+        0% { opacity: 0; transform: translateY(-10px) scale(0.6); }
+        20% { opacity: 1; transform: translateY(0) scale(1); }
+        100% { opacity: 0; transform: translateY(48px) scale(0.3); }
+    }
+
+    .marquee {
+        margin-top: 4rem;
+        border-top: 1px solid var(--color-line);
+        padding-top: 1.5rem;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .marquee-track {
+        display: inline-flex;
+        gap: 2rem;
+        animation: marquee-scroll 22s linear infinite;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+    .marquee-track span { display: inline-flex; gap: 2rem; align-items: center; }
+    .marquee-track i { color: var(--color-gold); font-style: normal; }
+
+    @keyframes marquee-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .work-word { clip-path: inset(0 0 0 0); }
+        .marquee-track { animation: none; }
+        .droplet { display: none; }
+    }
+</style>
+
+<script>
+    const wrap = document.querySelector<HTMLElement>('[data-work-word]');
+    const word = wrap?.querySelector('.work-word');
+    if (wrap && word && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    word.classList.add('revealed');
+                    wrap.classList.add('revealed');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        io.observe(wrap);
+    }
+</script>

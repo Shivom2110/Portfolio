@@ -1,0 +1,211 @@
+---
+const links = [
+    { href: '/#work', label: 'Work' },
+    { href: '/about', label: 'About' },
+    { href: '/#expertise', label: 'Expertise' },
+    { href: '/#projects', label: 'Projects' },
+    { href: '/#contact', label: 'Contact' },
+];
+---
+
+<header class="nav-bar" data-nav data-theme="light">
+    <a href="/#top" class="nav-logo" aria-label="Shivom Raskar — back to top">
+        <img src="/images/monogram.jpg" alt="" width="36" height="36" />
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+        <ul>
+            {links.map(link => (
+                <li><a href={link.href}>{link.label}</a></li>
+            ))}
+        </ul>
+    </nav>
+
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-drawer" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+
+    <span class="year-mark">S. Raskar &middot; {new Date().getFullYear()}</span>
+</header>
+
+<div class="nav-drawer" id="nav-drawer">
+    <ul>
+        {links.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+        ))}
+    </ul>
+</div>
+
+<script>
+    const toggle = document.getElementById('nav-toggle');
+    const drawer = document.getElementById('nav-drawer');
+    if (toggle && drawer) {
+        const close = () => {
+            toggle.setAttribute('aria-expanded', 'false');
+            drawer.classList.remove('open');
+        };
+        toggle.addEventListener('click', () => {
+            const open = drawer.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', String(open));
+        });
+        drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+        window.addEventListener('resize', () => { if (window.innerWidth > 760) close(); });
+    }
+
+    // Theme the nav explicitly from whichever section is behind it, rather
+    // than relying on mix-blend-mode over a fixed element -- that trick is
+    // unreliable across GPU/compositing paths (confirmed broken under
+    // software rendering while building this), so this is the robust version.
+    const navBar = document.querySelector('[data-nav]');
+    const sections = document.querySelectorAll<HTMLElement>('[data-nav-theme]');
+    if (navBar && sections.length) {
+        const io = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const theme = (entry.target as HTMLElement).dataset.navTheme;
+                        navBar.setAttribute('data-theme', theme ?? 'dark');
+                    }
+                });
+            },
+            { rootMargin: '-10% 0px -85% 0px', threshold: 0 }
+        );
+        sections.forEach((s) => io.observe(s));
+    }
+</script>
+
+<style>
+    .nav-bar {
+        --nav-color: var(--color-text);
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 2rem 0;
+        pointer-events: none;
+    }
+    .nav-bar > * { pointer-events: auto; }
+    .nav-bar[data-theme="light"] { --nav-color: var(--color-black-type); }
+    .nav-bar[data-theme="dark"] { --nav-color: var(--color-text); }
+
+    .nav-logo {
+        position: absolute;
+        left: 2rem;
+        top: 1.5rem;
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 8px;
+        overflow: hidden;
+        display: block;
+    }
+    .nav-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nav-links ul {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        margin: 0; padding: 0;
+    }
+    .nav-links a {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--nav-color, var(--color-text));
+        transition: color 0.3s var(--ease-standard);
+        position: relative;
+    }
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        left: 0; right: 0; bottom: -4px;
+        height: 1px;
+        background: currentColor;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s var(--ease-standard);
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-toggle {
+        display: none;
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 2.25rem;
+        height: 2.25rem;
+        background: transparent;
+        border: 1px solid var(--nav-color, var(--color-text));
+        border-radius: 8px;
+        cursor: pointer;
+        transition: border-color 0.3s var(--ease-standard);
+    }
+    .nav-toggle span {
+        display: block;
+        height: 2px;
+        width: 1rem;
+        margin: 0 auto;
+        background: var(--nav-color, var(--color-text));
+        transition: transform 0.3s var(--ease-standard), opacity 0.3s var(--ease-standard), background-color 0.3s var(--ease-standard);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-drawer {
+        position: fixed;
+        inset: 0;
+        z-index: 55;
+        background: var(--color-ink);
+        color: var(--color-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-100%);
+        transition: transform 0.4s var(--ease-out-expo);
+    }
+    .nav-drawer.open { transform: translateY(0); }
+    .nav-drawer ul {
+        list-style: none;
+        margin: 0; padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    .nav-drawer a {
+        font-family: var(--font-condensed);
+        font-size: 2.5rem;
+        text-decoration: none;
+        color: var(--color-text);
+    }
+
+    .year-mark {
+        position: fixed;
+        left: 2rem;
+        bottom: 2rem;
+        z-index: 40;
+        font-size: 0.65rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        color: var(--nav-color, var(--color-text));
+        opacity: 0.65;
+        transition: color 0.3s var(--ease-standard);
+        pointer-events: none;
+    }
+
+    @media (max-width: 760px) {
+        .nav-links { display: none; }
+        .nav-toggle { display: flex; }
+        .nav-logo { left: 1.25rem; top: 1.25rem; }
+        .nav-toggle { right: 1.25rem; top: 1.25rem; }
+        .year-mark { left: 1.25rem; bottom: 1.25rem; }
+    }
+</style>
